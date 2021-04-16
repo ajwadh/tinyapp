@@ -38,6 +38,10 @@ const generateRandomString = function () {
 app.get("/", (req, res) => {
   res.send("/urls");
 });
+
+app.get("/urls.json", (req, res) => {
+  res.json(urlDatabase);
+});
 //Register
 app.get("/register", (req, res) => {
   const user_id = req.cookies["user_id"];
