@@ -16,17 +16,19 @@
 
   <%- include('partials/_header')%>
 
-  <main style="margin: 1em;">
-    <h1 style="margin-top:50px;">Create TinyURL</h1>
-    <form class="form-inline" action="/urls" method="POST">
-      <div class="form-group mb-2">
-        <label for="longURL"><h3>Enter URL:</h3></label>
-        <input class="form-control" type="text" name="longURL" value="http://" style="width: 300px; margin: 1em;">
-        <button type ="submit" class="btn btn-primary">Submit</button>
-      </div>
-    </form>  
-  </main>
-  
+    <main style="margin: 1em;">
+      <h1 style="margin-top:50px;">Create TinyURL</h1>
+      <form class="form-inline" action="/urls" method="POST">
+        <div class="form-group mb-2">
+          <label for="longURL">
+            <h3>Enter URL:</h3>
+          </label>
+          <input class="form-control" type="text" name="longURL" value="http://" style="width: 300px; margin: 1em;">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </main>
+
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

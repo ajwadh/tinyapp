@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
-const {generateRandomString, lookUpEmail, urlsForUser} = require("./helpers.js");
+const { generateRandomString, lookUpEmail, urlsForUser } = require("./helpers.js");
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -46,18 +46,19 @@ app.get("/", (req, res) => {
   let templateVars = {
     user: users[req.session["user_id"]]
   };
-  if (templateVars.user){
+  if (templateVars.user) {
     return res.redirect("/urls");
   }
   return res.redirect("/login");
 });
 
- app.get("/urls.json", (req, res) => {
-   res.json(urlDatabase);
- });
+app.get("/urls.json", (req, res) => {
+  res.json(urlDatabase);
+});
 
 app.get("/urls", (req, res) => {
-  let templateVars = { user: users[req.session["user_id"]], urls: urlsForUser(req.session["user_id"], urlDatabase)
+  let templateVars = {
+    user: users[req.session["user_id"]], urls: urlsForUser(req.session["user_id"], urlDatabase)
   };
   if (!templateVars.user) {
     return res.redirect("/login");
@@ -82,7 +83,7 @@ app.get("/urls/:shortURL", (req, res) => {
   if (users[req.session["user_id"]] && users[req.session["user_id"]].id !== urlDatabase[shortURL].userID) {
     return res.send("You are not the owner of this url");
   }
-  const templateVars = { user: users[req.session["user_id"]], shortURL: req.params.shortURL, longURL: urlDatabase[req.params.shortURL],};
+  const templateVars = { user: users[req.session["user_id"]], shortURL: req.params.shortURL, longURL: urlDatabase[req.params.shortURL], };
   if (templateVars.user) {
     return res.render("urls_show", templateVars)
   } else {
@@ -92,7 +93,7 @@ app.get("/urls/:shortURL", (req, res) => {
 
 app.get("/u/:shortURL", (req, res) => {
   const shortURL = req.params.shortURL;
-  if (!urlDatabase[shortURL]){
+  if (!urlDatabase[shortURL]) {
     return res.redirect("/urls");
   }
   const longURL = urlDatabase[req.params.shortURL].longURL;
@@ -100,19 +101,20 @@ app.get("/u/:shortURL", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  if(users[req.session["user_id"]]){
+  if (users[req.session["user_id"]]) {
     return res.redirect("urls");
   }
   return res.render("login");
 });
 
 app.get("/register", (req, res) => {
-  if(users[req.session["user_id"]]){
+  if (users[req.session["user_id"]]) {
     return res.redirect("urls");
   }
-  const templateVars = { user: users[req.session["user_id"]],
-  error: null
-};
+  const templateVars = {
+    user: users[req.session["user_id"]],
+    error: null
+  };
   return res.render("register", templateVars);
 });
 
@@ -125,7 +127,7 @@ app.post("/urls", (req, res) => {
     return res.redirect("/login");
   }
   let shortURLKey = generateRandomString();
-  urlDatabase[shortURLKey] = { longURL: req.body.longURL, userID};
+  urlDatabase[shortURLKey] = { longURL: req.body.longURL, userID };
   return res.redirect(`/urls/${shortURLKey}`);
 });
 
@@ -135,7 +137,7 @@ app.post("/urls/:shortURL/delete", (req, res) => {
     return res.redirect("/login");
   } else if (users[req.session["user_id"]] && users[req.session["user_id"]].id === urlDatabase[shortURL].userID) {
     delete urlDatabase[shortURL];
-    return res.redirect ("/urls");
+    return res.redirect("/urls");
   } else {
     return res.send("Error, you are not the owner of this URL")
   }
@@ -144,11 +146,11 @@ app.post("/urls/:shortURL/delete", (req, res) => {
 app.post("/urls/:shortURL/edit", (req, res) => {
   let shortURLOne = req.params.shortURL;
   let longURL = req.body.longURL;
-  if(users[req.session["user_id"]] && users[req.session["user_id"]].id === urlDatabase[shortURLOne].userID){
+  if (users[req.session["user_id"]] && users[req.session["user_id"]].id === urlDatabase[shortURLOne].userID) {
     urlDatabase[shortURLOne].longURL = longURL;
     res.redirect("/urls");
   } else {
-  res.send("Error, you are not the owner of this URL");
+    res.send("Error, you are not the owner of this URL");
   }
 });
 
@@ -158,10 +160,10 @@ app.post("/urls/:shortURL", (req, res) => {
 
   if (!users[req.session["user_id"]]) {
     return res.redirect("/login");
-  } else if (users[req.session["user_id"]] && !longURL){
+  } else if (users[req.session["user_id"]] && !longURL) {
     return res.redirect(`/urls/${shortURL}`);
   }
-  
+
   if (users[req.session["user_id"]] && users[req.session["user_id"]].id !== urlDatabase[shortURL].userID) {
     return res.send("Error you can't edit the URL");
   } else {
@@ -193,12 +195,12 @@ app.post("/register", (req, res) => {
   } else if (lookUpEmail(userEmail, users)) {
     return res.status(400).render("register");
   }
-    const userID = generateRandomString();
-    users[userID] = {
-      id: userID,
-      email: userEmail,
-      password: bcrypt.hashSync(userPassword, saltRounds)
-    };
+  const userID = generateRandomString();
+  users[userID] = {
+    id: userID,
+    email: userEmail,
+    password: bcrypt.hashSync(userPassword, saltRounds)
+  };
 
   req.session["user_id"] = userID;
   return res.redirect("/urls");

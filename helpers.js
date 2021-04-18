@@ -22,4 +22,4 @@ const urlsForUser = (id, urlDatabase) => {
   return urls;
 }
 
-module.exports = {generateRandomString, lookUpEmail, urlsForUser};
+module.exports = { generateRandomString, lookUpEmail, urlsForUser };

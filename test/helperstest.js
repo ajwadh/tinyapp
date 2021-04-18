@@ -4,24 +4,24 @@ const { lookUpEmail, urlsForUser } = require('../helpers.js');
 
 const testUsers = {
   "userRandomID": {
-    id: "userRandomID", 
-    email: "user@example.com", 
+    id: "userRandomID",
+    email: "user@example.com",
     password: "purple-monkey-dinosaur"
   },
   "user2RandomID": {
-    id: "user2RandomID", 
-    email: "user2@example.com", 
+    id: "user2RandomID",
+    email: "user2@example.com",
     password: "dishwasher-funk"
   }
 };
 
 const testUrlDatabase = {
-  b2xVn2:{longURL: "http://www.lighthouselabs.ca", userID: "aJ48lW"},
-  i3BoGr:{longURL: "http://www.google.com", userID: "aJ48lW"},
+  b2xVn2: { longURL: "http://www.lighthouselabs.ca", userID: "aJ48lW" },
+  i3BoGr: { longURL: "http://www.google.com", userID: "aJ48lW" },
 };
 
-describe('lookUpEmail', function() {
-  it('should return a user with valid email', function() {
+describe('lookUpEmail', function () {
+  it('should return a user with valid email', function () {
     const user = lookUpEmail("user@example.com", testUsers)
     const expectedOutput = "userRandomID";
     // Write your assert statement here
@@ -29,7 +29,7 @@ describe('lookUpEmail', function() {
     assert.equal(user, expectedOutput);
   });
 
-  it('shoud return undefined if user does not exist', function() {
+  it('shoud return undefined if user does not exist', function () {
     const user = lookUpEmail("hossain.ajwad@gmail.com", testUsers);
     const expectedOutput = undefined;
     assert.equal(user, expectedOutput);
@@ -37,11 +37,11 @@ describe('lookUpEmail', function() {
 });
 
 describe("urlsForUser", () => {
-  it(`should return corresponding object that specific user has`, function() {
+  it(`should return corresponding object that specific user has`, function () {
     const result = urlsForUser("aJ48lW", testUrlDatabase);
     const expectedOutput = {
-      b2xVn2:{longURL: "http://www.lighthouselabs.ca", userID: "aJ48lW"},
-      i3BoGr:{longURL: "http://www.google.com", userID: "aJ48lW"},
+      b2xVn2: { longURL: "http://www.lighthouselabs.ca", userID: "aJ48lW" },
+      i3BoGr: { longURL: "http://www.google.com", userID: "aJ48lW" },
     };
     assert.deepEqual(result, expectedOutput);
   });
@@ -52,4 +52,4 @@ describe("urlsForUser", () => {
 
     assert.deepEqual(result, expectedOutput);
   });
-}); 
+});
