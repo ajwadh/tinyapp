@@ -11,23 +11,22 @@
 
 <body>
   <%- include('partials/_header') %>
-    <main>
-      <h3 style="text-align: center">Login</h3>
-      <form class="form-inline justify-content-center" action="/login" method="POST">
-        <tr>
-          <div class="form-group mb-2">
-            <label for="longURL">Enter email:</label>
-            <input class="form-control" type="email" name="email" placeholder="Enter email"
-              style="width: 300px; margin: 1em">
-
-            <label for="longURL">Password:</label>
-            <input class="form-control" type="password" name="password" placeholder="Password"
-              style="width: 300px; margin: 1em">
-          </div>
-        </tr>
-        <button type="submit" class="btn btn-outline-success">Login</button>
-      </form>
-    </main>
+  <h1 style="margin-left:20px;margin-top:50px;">
+    Login
+  </h1>
+  <h3 style="margin-left:20px;padding:10px 0">
+    Email Address
+  </h3>
+  <form  style="margin-left:20px;" method="POST" action="/login">
+    <input type="email" name="email" placeholder="enter your email">
+    <h3 style="padding:10px 0">
+      Password
+    </h3>
+    <input type="password" name="password" placeholder="enter your password">
+    <button class="btn btn-primary" style="display:block;margin-top:15px" type="submit">
+      Login
+    </button>
+  </form>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
