@@ -3,16 +3,16 @@ const generateRandomString = () => {
   return randomKey
 };
 
-const lookUpEmail = (email, password) => {
+const lookUpEmail = (email, users) => {
   for (const key in users) {
     if (users[key].email === email) {
       return key;
     }
   }
-  return false;
+  return undefined;
 };
 
-const urlsForUser = (id) => {
+const urlsForUser = (id, urlDatabase) => {
   let urls = {};
   for (let key in urlDatabase) {
     if (urlDatabase[key].userID === id) {

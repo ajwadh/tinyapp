@@ -20,7 +20,7 @@
         <form method="POST" action="/urls/<%= shortURL %>">
           <div>
             <span>New URL:</span>
-            <input type="text" name="longURL" value="http://">
+            <input type="text" value="<%= longURL %>" name="longURL">
             <input class="btn btn-primary" type="button" value="Submit">
           </div>
         </form>

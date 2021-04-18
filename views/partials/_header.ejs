@@ -8,19 +8,17 @@
       <div class="navbar-nav">
         <a style="width:90px;margin-top:7px;" class="nav-item nav-link" href="/urls">My URLs</a>
         <a style="width:150px;margin-top:7px;"class="nav-item nav-link" href="/urls/new">Create New URL</a>
-        <a style="margin-top:7px;"class="nav-item nav-link" href="/register">Register</a>
-        <a style="margin-top:7px;"class="nav-item nav-link" href="/login">Login</a>
-        
-        <% if (typeof user === "undefined") { %> 
-          <a class="nav-item nav-link" href="/login">Login</a>
-          <a class="nav-item nav-link" href="/register">Create New Account</a>
-        <% } else {%>
-          <form class="form-inline float-right" method="POST" action="/logout">
-            <div>Logged In As: <%= user.email %> </div>  
-            <input class="btn btn-outline-dark ml-3 my-sm-0"type="submit" value="Logout">
-          </form>
-        </div>
-        <% } %>
+          <div style='display:flex;justify-content:flex-end;width:63vw;'>
+            <% if (typeof user === "undefined") { %> 
+              <a class="nav-item nav-link" href="/login">Login</a>
+              <a class="nav-item nav-link" href="/register">Create New Account</a>
+            <% } else {%>
+              <form class="form-inline float-right" method="POST" action="/logout">
+                <div>Logged In As: <%= user.email %> </div>  
+                <input class="btn btn-outline-dark ml-3 my-sm-0"type="submit" value="Logout">
+              </form>
+            </div>
+            <% } %>
       </div>
     </div>
   </nav>
